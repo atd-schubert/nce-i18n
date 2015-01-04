@@ -57,7 +57,6 @@ module.exports = function(cms){
 
 //# Public declarations and exports:
   ext.createDictionary = function(name, dict, defaultLang){
-    console.log("OK", arguments)
     return Dictionary.create.apply(Dictionary, arguments);
   };
   ext.removeDictionary = function(name){
