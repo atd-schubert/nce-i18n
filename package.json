@@ -2,7 +2,7 @@
   "name": "nce-i18n",
   "version": "0.0.1",
   "description": "A i18n extension for the nce cms",
-  "main": "nce-i18n.js",
+  "main": "i18n.js",
   "scripts": {
     "test": "mocha"
   },
