@@ -245,6 +245,7 @@ describe('Use middleware to create a translator', function(){
   var extMgr = ExtMgr(nce);
   extMgr.activateExtension(extMgr);
   extMgr.activateExtension(ext);
+  extMgr.getActivatedExtension("server");
   
   ext.createDictionary("example", sampleDict);
   

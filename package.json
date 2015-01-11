@@ -24,10 +24,13 @@
   "homepage": "https://github.com/atd-schubert/nce-i18n",
   "dependencies": {},
   "devDependencies": {
-    "nce": "0.0.1",
+    "nce": "0.1.0",
+    "nce-extension-manager": "0.0.1",
+    "nce-server": "^0.1.0",
     "nce-winston": "0.0.2"
   },
   "peerDependencies": {
+    "nce": "0.1.0",
     "nce-winston": "^0.0.2"
   }
 }
