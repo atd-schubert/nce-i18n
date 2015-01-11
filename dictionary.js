@@ -32,7 +32,7 @@ Dictionary.get = function(name){
   return dictionaries[name];
 };
 Dictionary.create = function(name, languagePack, defaultLanguage){
-  if(name in dictionaries) throw new Error("There is already a dictionary with this name!");
+  if(name in dictionaries) throw new Error("There is already a dictionary with the name '" + name + "'!");
   dictionaries[name] = new Dictionary(languagePack, defaultLanguage);
   return dictionaries[name];
 };
