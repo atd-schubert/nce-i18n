@@ -30,7 +30,7 @@
     "nce-winston": "0.0.2"
   },
   "peerDependencies": {
-    "nce": "0.1.0",
+    "nce": "^0.1.0",
     "nce-winston": "^0.0.2"
   }
 }
