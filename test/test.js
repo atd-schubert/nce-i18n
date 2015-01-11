@@ -1,9 +1,11 @@
 "use strict";
 
+
 var NCE = require("nce");
-var Logger = require("nce-winston");
-var Server = require("nce-server");
+var ExtMgr = require("nce-extension-manager");
 var Ext = require("../");
+var Server = require("nce-server");
+
 var sampleDict = {
   "de":{
     "ok":"Bereit",
@@ -187,9 +189,6 @@ describe('Unit-tests for translator', function(){
 
 describe('Basic integration in NCE', function(){
   var nce = new NCE();
-  var logger = Logger(nce);
-  logger.install();
-  logger.activate();
   
   it('should be insertable into NCE', function(done){
     var ext = Ext(nce);
@@ -201,16 +200,15 @@ describe('Basic integration in NCE', function(){
 describe('Basic integration in NCE', function(){
   var nce = new NCE();
   var ext = Ext(nce);
-  var logger = Logger(nce);
-  logger.install();
-  logger.activate();
+  var extMgr = ExtMgr(nce);
+  extMgr.activateExtension(extMgr);
   
   it('should be installable', function(done){
-    if(ext.install()) return done();
+    if(extMgr.installExtension(ext)) return done();
     return done(new Error("Can not install extension"));
   });
   it('should be activatable', function(done){
-    if(ext.activate()) return done();
+    if(extMgr.activateExtension(ext)) return done();
     return done(new Error("Can not activate extension"));
   });
   it('should be deactivatable', function(done){
@@ -244,49 +242,12 @@ describe('Basic integration in NCE', function(){
 describe('Use middleware to create a translator', function(){
   var nce = new NCE();
   var ext = Ext(nce);
-  var logger = Logger(nce);
-  var server = Server(nce);
-  logger.install();
-  logger.activate();
-  server.install();
-  server.activate();
-  ext.install();
-  ext.activate();
+  var extMgr = ExtMgr(nce);
+  extMgr.activateExtension(extMgr);
+  extMgr.activateExtension(ext);
   
-  ext.createDictionary("sample", sampleDict);
+  ext.createDictionary("example", sampleDict);
   
   return;
-  it('should be installable', function(done){
-    if(ext.install()) return done();
-    return done(new Error("Can not install extension"));
-  });
-  it('should be activatable', function(done){
-    if(ext.activate()) return done();
-    return done(new Error("Can not activate extension"));
-  });
-  it('should be deactivatable', function(done){
-    if(ext.deactivate()) return done();
-    return done(new Error("Can not deactivate extension"));
-  });
-  it('should be uninstallable', function(done){
-    if(ext.uninstall()) return done();
-    return done(new Error("Can not uninstall extension"));
-  });
-  
-  it('should be installable again', function(done){
-    if(ext.install()) return done();
-    return done(new Error("Can not install extension"));
-  });
-  it('should be activatable again', function(done){
-    if(ext.activate()) return done();
-    return done(new Error("Can not activate extension"));
-  });
-  it('should be deactivatable again', function(done){
-    if(ext.deactivate()) return done();
-    return done(new Error("Can not deactivate extension"));
-  });
-  it('should be uninstallable again', function(done){
-    if(ext.uninstall()) return done();
-    return done(new Error("Can not uninstall extension"));
-  });
+  // TODO: create additional tests
 });
