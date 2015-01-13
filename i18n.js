@@ -1,7 +1,6 @@
 "use strict";
-
-var Dictionary = require("./dictionary");
-var Translator = require("./translator");
+var DictionaryModule = require("./dictionary");
+var TranslatorModule = require("./translator");
 
 module.exports = function(cms){
   if(!cms) throw new Error("You have to specify the cms object");
@@ -38,6 +37,9 @@ module.exports = function(cms){
   });
   
 //# Private declarations:
+  var Dictionary = DictionaryModule.wrapper();
+  var Translator = TranslatorModule.wrapper();
+  
   var router = function(req, res, next){
     
     // get settings in this order: session / user / browser-settings / defaults
@@ -69,5 +71,5 @@ module.exports = function(cms){
   return ext;
 }
 
-module.exports.Dictionary = Dictionary;
-module.exports.Translator = Translator;
+module.exports.Dictionary = DictionaryModule;
+module.exports.Translator = TranslatorModule;

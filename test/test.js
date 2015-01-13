@@ -133,10 +133,11 @@ describe('Unit-tests for translator', function(){
     if(esT.__(dict, "ok") === "OK") return done();
     return done(new Error("Translation was not correct."));
   });
+  /*
   it('should translate with dictionary as string of its name.', function(done){
     if(esT.__("test", "ok") === "OK") return done();
     return done(new Error("Translation was not correct."));
-  });
+  });*/
   it('should query different ways on nested objects.', function(done){
     if(enT.__(dict, "nested.object.value") === enT.__(dict, "nested", "object.value") &&
       enT.__(dict, "nested", "object", "value") === enT.__(dict, "nested.object", "value")) return done();
@@ -247,7 +248,7 @@ describe('Use middleware to create a translator', function(){
   extMgr.activateExtension(ext);
   extMgr.getActivatedExtension("server");
   
-  ext.createDictionary("example", sampleDict);
+  ext.createDictionary("sample", sampleDict); // TODO: Test
   
   return;
   // TODO: create additional tests
