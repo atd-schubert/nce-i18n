@@ -1,6 +1,6 @@
-#nce-i18n
+#i18n for nce
 ## Description
-Internationalization (not only) for nce
+Internationalization (not only) for the [nce framework](https://github.com/atd-schubert/node-nce)
 
 ## How to install
 Install with npm: `npm install --save nce-i18n`
@@ -139,4 +139,39 @@ translator.__g(g, "masculine", "dog"); // -> dog
 translator.__g("gender", "f", "dog"); // -> bitch
 translator.__g("gender", "feminine", "dog"); // -> bitch
 ```
-Using functions and arguments for the function works the same way like using __!
+Using functions and arguments for the function works the same way like using `__`!
+
+## Integrate in NCE
+### Config settings
+You are able to use the following [config-settings](https://github.com/atd-schubert/node-nce/wiki/Extension-Class#configuration) (listed with their defaults):
+
+* `fallbackLanguage: "en"`: Language to use, when no other requested language matches.
+* `logger: {}`: Settings for [logger-extension](https://github.com/atd-schubert/nce-winston)
+
+### Basic methods
+#### ext.createDictionary = function(name, dict, defaultLang)
+You can use this methods like described above in "dirctionary" section.
+#### ext.removeDictionary = function(name)
+You can use this methods like described above in "dirctionary" section.
+#### ext.getDictionary = function(name)
+You can use this methods like described above in "dirctionary" section.
+
+### Use in a request-middleware.
+* req.i18n.translator.__(dict, ... [fn], [arguments])
+* req.i18n.translator.__n(dict, n, ... [fn], [arguments])
+* req.i18n.translator.__g(dict, gender, ... [fn], [arguments])
+
+You can use this methods like described above in "translator" section.
+
+#### ext.dummy(name, cb, opts)
+Dummy method.
+
+##### Arguments
+1. `name`[String]:
+1. `cb`[Function]: Callback-function with the arguments:
+    1. `error`[Error]: Used for exceptions
+    1. `data`[Buffer]: Dummy-Data
+    1. `result`[Object]: Result of the query
+        * `content`[String]:
+        * `query`[String]:
+1. `opts`[Object]: Options:
