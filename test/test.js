@@ -246,10 +246,20 @@ describe('Use middleware to create a translator', function(){
   var extMgr = ExtMgr(nce);
   extMgr.activateExtension(extMgr);
   extMgr.activateExtension(ext);
-  extMgr.getActivatedExtension("server");
   
   ext.createDictionary("sample", sampleDict); // TODO: Test
   
+  it('should i18n-functions in request', function(done){
+    var req = {};
+    var res = {};
+    nce.middleware(req, res, function(err){
+      if(err) return done(err);
+      if(req.translator && typeof req.translator.__ === "function" && typeof req.translator.__n === "function" &&typeof req.translator.__g === "function") return done();
+      //ext.logger.error(typeof req.__, req);
+      return done(new Error("Have no middleware..."));
+    });
+  });
   return;
+  
   // TODO: create additional tests
 });
